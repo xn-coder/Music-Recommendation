@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore</title>
+    <link rel="stylesheet" href="/static/css/explore.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Music Recommender System</h1>
+        <label for="song-select">Type or select a song from the dropdown</label><br>
+        <select id="song-select">
+            {% for song in songs %}
+                <option value="{{ song }}">{{ song }}</option>
+            {% endfor %}
+        </select><br>
+        <button id="show-recommendation-button">Show Recommendation</button>
+        <div class="recommendations">
+        </div>
+    </div>
+    <script>
+        document.querySelector('#show-recommendation-button').addEventListener('click', function() {
+            const selectedSong = document.querySelector('#song-select').value;
+            fetch(`/recommend/?song=${encodeURIComponent(selectedSong)}`)
+                .then(response => response.json())
+                .then(data => {
+                    const recommendationsDiv = document.querySelector('.recommendations');
+                    recommendationsDiv.innerHTML = ''; // Clear previous recommendations
+        
+                    data.recommendations.forEach(rec => {
+                        // Create a new div for this song
+                        const songDiv = document.createElement('div');
+                        songDiv.className = 'song';
+        
+                        // Create an img element for the song's image
+                        const songImage = document.createElement('img');
+                        songImage.src = rec.poster; // Assuming 'poster' is the image URL
+                        songImage.alt = `Album cover for ${rec.name}`;
+        
+                        // Create a paragraph element for the song's title
+                        const songTitle = document.createElement('p');
+                        songTitle.textContent = rec.name;
+        
+                        // Append the img and p elements to the song div
+                        songDiv.appendChild(songImage);
+                        songDiv.appendChild(songTitle);
+        
+                        // Append the song div to the recommendations container
+                        recommendationsDiv.appendChild(songDiv);
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+        });
+        </script>
+</body>
+</html>
