@@ -2,3 +2,6 @@ django
 pickle
 streamlit
 spotipy
+nltk
+pandas
+scikit-learn
