@@ -13,6 +13,17 @@ The Music Recommendation System leverages a dataset containing information about
 - **Text Analysis:** Advanced text processing techniques to analyze song lyrics and identify themes.
 - **User Interface:** A simple and intuitive interface for users to interact with the recommendation system.
 
+## Getting the Data
+
+The dataset `spotify_millsongdata.csv` is required to run some parts of this project. You can obtain this dataset from the release section of this repository. Follow the steps below to download it:
+
+1. Navigate to the **Releases** section of this repository.
+2. Look for the latest release containing the dataset.
+3. In the assets of the release, find `spotify_millsongdata.csv`.
+4. Click on the file name to download it.
+
+Once downloaded, place the file in the appropriate directory as required by the project setup instructions.
+
 ## Installation
 
 To set up the Music Recommendation System on your local machine, follow these steps:
